@@ -1,0 +1,154 @@
+1)SELECT first_name, last_name FROM Customer limit 5;
+
+first_name  last_name 
+----------  ----------
+MARY        SMITH     
+PATRICIA    JOHNSON   
+LINDA       WILLIAMS  
+BARBARA     JONES     
+ELIZABETH   BROWN  
+
+2)SELECT email FROM Customer WHERE first_name= ÒWILLARDÓ;
+
+email                             
+----------------------------------
+WILLARD.LUMPKIN@sakilacustomer.org
+
+3)SELECT count(*) FROM Customer;
+
+count(*)  
+----------
+599     
+
+4)SELECT count(*) FROM Customer WHERE store_id=1;
+
+count(*)  
+----------
+326  
+
+5)SELECT rental_rate FROM Film WHERE title="VIRTUAL SPOILERS";
+
+rental_rate
+-----------
+4.99    
+
+6)SELECT title FROM Film WHERE (title LIKE '%PRINCESS%');
+
+title         
+--------------
+IMAGE PRINCESS
+PRINCESS GIANT
+
+7)SELECT title FROM Film WHERE length > 180 limit 5;
+
+title           
+----------------
+ANALYZE HOOSIERS
+BAKED CLEOPATRA 
+CATCH AMISTAD   
+CHICAGO NORTH   
+CONSPIRACY SPIRI
+
+8)SELECT title FROM Film WHERE rating="G" AND length < 60 limit 5;
+
+title         
+--------------
+ACE GOLDFINGER
+BLUES INSTINCT
+BRIDE INTRIGUE
+DESTINY SATURD
+DIVORCE SHININ
+
+9)SELECT MAX(replacement_cost) FROM Film;
+
+MAX(replacement_cost)
+---------------------
+29.99  
+
+10)SELECT rating, count(*) FROM Film GROUP BY rating;
+
+rating      count(*)  
+----------  ----------
+G           178       
+NC-17       210       
+PG          194       
+PG-13       223       
+R           195 
+
+11)SELECT COUNT(*) FROM film_actor JOIN Film WHERE title="SCALAWAG DUCK" AND film_actor.film_id=film.film_id;
+
+COUNT(*)  
+----------
+5     
+
+12)SELECT film_id FROM actor, film_actor WHERE first_name="JUDE" AND last_name="CRUISE" AND actor.actor_id=film_actor.actor_id limit 5;
+
+film_id   
+----------
+16        
+34        
+101       
+114       
+122  
+
+13)SELECT name FROM Film, Language WHERE title="ACE GOLDFINGER" AND Film.language_id=Language.language_id;
+
+name      
+----------
+English 
+
+14)SELECT Customer.customer_id, COUNT(*) FROM Customer, Rental WHERE Customer.customer_id=Rental.customer_id GROUP BY Customer.customer_id limit 5;
+
+customer_id  COUNT(*)  
+-----------  ----------
+1            32        
+2            27        
+3            26        
+4            22        
+5            38   
+
+15)SELECT COUNT(*) FROM Customer, Rental WHERE Customer.customer_id=Rental.customer_id AND last_name="SMITHÓ;
+
+COUNT(*)  
+----------
+32    
+
+16)SELECT Rental.customer_id FROM Customer, Rental WHERE Customer.customer_id=Rental.customer_id AND return_date IS NULL limit 5;
+
+customer_id
+-----------
+155        
+335        
+83         
+219        
+99  
+
+17)SELECT film_actor.actor_id FROM Film, film_actor, Actor WHERE Film.film_id=film_actor.film_id AND Actor.actor_id=film_actor.actor_id AND title="SPLASH GUMP" limit 5;
+
+actor_id  
+----------
+1         
+4         
+13        
+24        
+61        
+
+18)SELECT Film.title FROM Film JOIN Actor JOIN film_actor WHERE Film.film_id=film_actor.film_id AND Actor.actor_id=film_actor.actor_id AND first_name="PENELOPE" AND last_name="GUINESS" limit 5;
+
+title           
+----------------
+ACADEMY DINOSAUR
+ANACONDA CONFESS
+ANGELS LIFE     
+BULWORTH COMMAND
+CHEAPER CLYDE  
+
+19)SELECT Film.title FROM Film, Rental, Inventory, Customer WHERE Customer.customer_id=Rental.customer_id AND Inventory.inventory_id=rental.inventory_id AND Inventory.film_id=Film.film_id AND Customer.last_name="KNIGHT" limit 5;
+
+title        
+-------------
+JERICHO MULAN
+FROST HEAD   
+CLERKS ANGELS
+WIFE TURN    
+EXPECATIONS N
